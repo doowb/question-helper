@@ -2,6 +2,8 @@
 
 > Helper used to ask questions and output the answer. Useful with Template, Handlebars, and Loadash.
 
+> Inspired by conversations with [Jon Schlinkert](https://github.com/jonschlinkert)
+
 ## Install
 #### Install with [npm](npmjs.org):
 
