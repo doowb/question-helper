@@ -47,11 +47,11 @@ var inquirer = require('inquirer');
  * });
  * ```
  * 
- * @doc    api-[method]
  * @param  {[type]}     key     [description]
  * @param  {[type]}     options [description]
  * @param  {Function}   next    [description]
  * @return {[type]}             [description]
+ * @api public
  */
 
 module.exports = function question (key, options, next) {

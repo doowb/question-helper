@@ -15,16 +15,51 @@ npm i question-helper --save-dev
 npm test
 ```
 
-## Usage
+## API
+### [.exports](index.js#L57)
 
+Prompt a user for a question and get an answer back.
+
+* **{[type]}**: key     [description]    
+* **{[type]}**: options [description]    
+* **{Function}**: next    [description]    
+* `returns` **{[type]}**  
+
+> Native node.js
 ```js
-var questionHelper = require('question-helper');
-console.log(questionHelper('abc'));
-//=> ['a', 'b', 'c'];
+var question = require('question-helper');
+var context = {questions: {name: "What's your name?"}};
+question.call({ctx: context}, "name", function (err, answer) {
+  if (err) return console.log('error', err);
+  console.log('Answer', answer);
+});
 ```
 
-## API
+> Handlebars (using Template)
+```js
+var template = require('template');
+var template.engine('hbs', require('engine-handlebars'));
 
+var question = require('question-helper');
+var context = {questions: {name: "What's your name?"}};
+template.page('author.hbs', "Author: {{question 'name'}}");
+template.render('author.hbs', context, function (err, content) {
+  if (err) return console.log('error', err);
+  console.log(content);
+});
+```
+
+> Lodash (using Template)
+```js
+var template = require('template');
+var question = require('question-helper');
+var context = {questions: {name: "What's your name?"}};
+template.page('author.html', "Author: <%= question('name') %>");
+template.render('author.html', context, function (err, content) {
+  if (err) return console.log('error', err);
+  console.log(content);
+});
+```
 
 ## Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue][issues].
