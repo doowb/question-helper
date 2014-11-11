@@ -81,11 +81,10 @@ describe('question', function () {
         done();
       });
     });
-    xit('should throw an error when a key is not passed in', function (done) {
+    it('should throw an error when a key is not passed in', function (done) {
       this.timeout(timeout);
       try {
         template.render('test-no-key.hbs', context, function (err, content) {
-          console.log(arguments);
           if (err) return done();
           done(new Error('Expected an error to be thrown'));
         });
@@ -93,7 +92,7 @@ describe('question', function () {
         done();
       }
     });
-    xit('should throw an error when a key is not a string', function (done) {
+    it('should throw an error when a key is not a string', function (done) {
       template.render('test-bad-key.hbs', context, function (err, content) {
         if (err) {
           err.message.indexOf('Question expected the first parameter to be a string').should.equal(0);
@@ -110,7 +109,7 @@ describe('question', function () {
       template = new Template();
       template.page('test-question.html', 'Your name is <%= question("What\'s your name?") %>');
       template.page('test-key.html', 'Your name is <%= question("name") %>');
-      template.page('test-no-key.html', 'Your name is <%= question %>');
+      template.page('test-no-key.html', 'Your name is <%= question() %>');
       template.page('test-bad-key.html', 'Your name is <%= question(questions) %>');
       template.asyncHelper('question', question);
     });
@@ -131,10 +130,10 @@ describe('question', function () {
         done();
       });
     });
-    xit('should throw an error when a key is not passed in', function (done) {
+    it('should throw an error when a key is not passed in', function (done) {
       this.timeout(timeout);
       try {
-        template.render('test-no-key', context, function (err, content) {
+        template.render('test-no-key.html', context, function (err, content) {
           if (err) return done();
           done(new Error('Expected an error to be thrown'));
         });
@@ -142,8 +141,8 @@ describe('question', function () {
         done();
       }
     });
-    xit('should throw an error when a key is not a string', function (done) {
-      template.render('test-bad-key', context, function (err, content) {
+    it('should throw an error when a key is not a string', function (done) {
+      template.render('test-bad-key.html', context, function (err, content) {
         if (err) {
           err.message.indexOf('Question expected the first parameter to be a string').should.equal(0);
           return done();
