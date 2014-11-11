@@ -16,7 +16,7 @@ npm test
 ```
 
 ## API
-### [.exports](index.js#L57)
+### [.exports](index.js#L60)
 
 Prompt a user for a question and get an answer back.
 
@@ -26,6 +26,7 @@ Prompt a user for a question and get an answer back.
 * `returns` **{[type]}**  
 
 > Native node.js
+
 ```js
 var question = require('question-helper');
 var context = {questions: {name: "What's your name?"}};
@@ -36,6 +37,7 @@ question.call({ctx: context}, "name", function (err, answer) {
 ```
 
 > Handlebars (using Template)
+
 ```js
 var template = require('template');
 var template.engine('hbs', require('engine-handlebars'));
@@ -50,6 +52,7 @@ template.render('author.hbs', context, function (err, content) {
 ```
 
 > Lodash (using Template)
+
 ```js
 var template = require('template');
 var question = require('question-helper');

@@ -12,6 +12,7 @@ var inquirer = require('inquirer');
  * Prompt a user for a question and get an answer back.
  *
  * > Native node.js
+ * 
  * ```js
  * var question = require('question-helper');
  * var context = {questions: {name: "What's your name?"}};
@@ -22,6 +23,7 @@ var inquirer = require('inquirer');
  * ```
  *
  * > Handlebars (using Template)
+ * 
  * ```js
  * var template = require('template');
  * var template.engine('hbs', require('engine-handlebars'));
@@ -36,6 +38,7 @@ var inquirer = require('inquirer');
  * ```
  *
  * > Lodash (using Template)
+ * 
  * ```js
  * var template = require('template');
  * var question = require('question-helper');
