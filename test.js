@@ -31,6 +31,26 @@ describe('question', function () {
         done();
       });
     });
+    it('should throw an error when a key is not passed in', function (done) {
+      this.timeout(timeout);
+      try {
+        question(function (err, answer) {
+          if (err) return done();
+          done(new Error('Expected an error to be thrown'));
+        });
+      } catch (err) {
+        done();
+      }
+    });
+    it('should throw an error when a key is not a string', function (done) {
+      question({}, function (err, answer) {
+        if (err) {
+          err.message.indexOf('Question expected the first parameter to be a string').should.equal(0);
+          return done();
+        }
+        done(new Error('Expected an error to be thrown'));
+      });
+    });
   });
 
   describe('as a handlebars helper', function () {
@@ -40,6 +60,8 @@ describe('question', function () {
       template.engine('hbs', engineHandlebars);
       template.page('test-question.hbs', 'Your name is {{question "What\'s your name?"}}');
       template.page('test-key.hbs', 'Your name is {{question "name"}}');
+      template.page('test-no-key.hbs', 'Your name is {{question}}');
+      template.page('test-bad-key.hbs', 'Your name is {{question questions}}');
       template.asyncHelper('question', question);
     });
     it('should return an answer given a question', function (done) {
@@ -59,6 +81,27 @@ describe('question', function () {
         done();
       });
     });
+    xit('should throw an error when a key is not passed in', function (done) {
+      this.timeout(timeout);
+      try {
+        template.render('test-no-key.hbs', context, function (err, content) {
+          console.log(arguments);
+          if (err) return done();
+          done(new Error('Expected an error to be thrown'));
+        });
+      } catch (err) {
+        done();
+      }
+    });
+    xit('should throw an error when a key is not a string', function (done) {
+      template.render('test-bad-key.hbs', context, function (err, content) {
+        if (err) {
+          err.message.indexOf('Question expected the first parameter to be a string').should.equal(0);
+          return done();
+        }
+        done(new Error('Expected an error to be thrown'));
+      });
+    });
   });
 
   describe('as a lodash helper', function () {
@@ -67,6 +110,8 @@ describe('question', function () {
       template = new Template();
       template.page('test-question.html', 'Your name is <%= question("What\'s your name?") %>');
       template.page('test-key.html', 'Your name is <%= question("name") %>');
+      template.page('test-no-key.html', 'Your name is <%= question %>');
+      template.page('test-bad-key.html', 'Your name is <%= question(questions) %>');
       template.asyncHelper('question', question);
     });
     it('should return an answer given a question', function (done) {
@@ -84,6 +129,26 @@ describe('question', function () {
         if (err) console.log('err', err);
         (content.indexOf('<%=') === -1).should.be.true;
         done();
+      });
+    });
+    xit('should throw an error when a key is not passed in', function (done) {
+      this.timeout(timeout);
+      try {
+        template.render('test-no-key', context, function (err, content) {
+          if (err) return done();
+          done(new Error('Expected an error to be thrown'));
+        });
+      } catch (err) {
+        done();
+      }
+    });
+    xit('should throw an error when a key is not a string', function (done) {
+      template.render('test-bad-key', context, function (err, content) {
+        if (err) {
+          err.message.indexOf('Question expected the first parameter to be a string').should.equal(0);
+          return done();
+        }
+        done(new Error('Expected an error to be thrown'));
       });
     });
   });
