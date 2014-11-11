@@ -16,14 +16,13 @@ npm test
 ```
 
 ## API
-### [.exports](index.js#L60)
+### [.exports](index.js#L59)
 
 Prompt a user for a question and get an answer back.
 
-* **{[type]}**: key     [description]    
-* **{[type]}**: options [description]    
-* **{Function}**: next    [description]    
-* `returns` **{[type]}**  
+* `key` **{String}**: Either a key on a `questions` object on the context or a question to ask.    
+* `options` **{String}**: Additional options to pass.    
+* `next` **{Function}**: Callback function that will be passed an error and/or the results of asking the question.    
 
 > Native node.js
 

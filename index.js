@@ -50,10 +50,9 @@ var inquirer = require('inquirer');
  * });
  * ```
  * 
- * @param  {[type]}     key     [description]
- * @param  {[type]}     options [description]
- * @param  {Function}   next    [description]
- * @return {[type]}             [description]
+ * @param  {String} `key` Either a key on a `questions` object on the context or a question to ask.
+ * @param  {String} `options` Additional options to pass.
+ * @param  {Function} `next` Callback function that will be passed an error and/or the results of asking the question.
  * @api public
  */
 
