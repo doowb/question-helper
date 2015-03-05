@@ -1,50 +1,59 @@
-# question-helper 
+# question-helper [![NPM version](https://badge.fury.io/js/question-helper.svg)](http://badge.fury.io/js/question-helper)  [![Build Status](https://travis-ci.org/doowb/question-helper.svg)](https://travis-ci.org/doowb/question-helper) 
 
 > Helper used to ask questions and output the answer. Useful with Template, Handlebars, and Loadash.
 
-> Inspired by conversations with [Jon Schlinkert](https://github.com/jonschlinkert)
+Inspired by conversations with [Jon Schlinkert](https://github.com/jonschlinkert)
 
-## Install
-#### Install with [npm](npmjs.org):
-
-```bash
-npm i question-helper --save-dev
-```
-
-## Run tests
+## Install with [npm](npmjs.org)
 
 ```bash
-npm test
+npm i question-helper --save
 ```
 
-## API
-### [.exports](index.js#L59)
-
-Prompt a user for a question and get an answer back.
-
-* `key` **{String}**: Either a key on a `questions` object on the context or a question to ask.    
-* `options` **{String}**: Additional options to pass.    
-* `next` **{Function}**: Callback function that will be passed an error and/or the results of asking the question.    
-
-> Native node.js
+## Usage
 
 ```js
 var question = require('question-helper');
 var context = {questions: {name: "What's your name?"}};
+
+// Prompt a user for a question and get an answer back.
 question.call({ctx: context}, "name", function (err, answer) {
   if (err) return console.log('error', err);
   console.log('Answer', answer);
 });
 ```
 
-> Handlebars (using Template)
+**Params**
+
+* `key` **{String}**: Either a key on a `questions` object on the context or a question to ask.    
+* `options` **{String}**: Additional options to pass.    
+* `next` **{Function}**: Callback function that will be passed an error and/or the results of asking the question.    
+
+
+### Template 
+
+To use with [template]:
+
+```bash
+npm i template --save
+```
+
+Then add to your project.
 
 ```js
 var template = require('template');
-var template.engine('hbs', require('engine-handlebars'));
+```
+
+**handebars**
+
+Register [handlebars as an engine][engine-handlebars]:
+
+```js
+template.engine('hbs', require('engine-handlebars'));
 
 var question = require('question-helper');
 var context = {questions: {name: "What's your name?"}};
+
 template.page('author.hbs', "Author: {{question 'name'}}");
 template.render('author.hbs', context, function (err, content) {
   if (err) return console.log('error', err);
@@ -52,21 +61,40 @@ template.render('author.hbs', context, function (err, content) {
 });
 ```
 
-> Lodash (using Template)
+**Lo-Dash**
+
+Register [Lo-Dash as an engine][engine-lodash]:
 
 ```js
-var template = require('template');
-var question = require('question-helper');
+template.engine('html', require('engine-lodash'));
+
 var context = {questions: {name: "What's your name?"}};
 template.page('author.html', "Author: <%= question('name') %>");
+
 template.render('author.html', context, function (err, content) {
   if (err) return console.log('error', err);
   console.log(content);
 });
 ```
 
+## Running tests
+Install dev dependencies.
+
+```bash
+npm i -d && npm test
+```
+
+
 ## Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue][issues].
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/doowb/question-helper/issues)
+
+
+## Related
+* [template-helpers](https://github.com/jonschlinkert/template-helpers): Generic JavaScript helpers that can be used with any template engine. Handlebars, Lo-Dash, Underscore, or any engine that supports helper functions.
+* [handlebars-helpers](https://github.com/assemble/handlebars-helpers): 120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. Includes helpers like {{i18}}, {{markdown}}, {{relative}}, {{extend}}, {{moment}}, and so on.
+* [template](https://github.com/jonschlinkert/template): Render templates from any engine. Make custom template types, use layouts on pages, partials or any custom template type, custom delimiters, helpers, middleware, routes, loaders, and lots more. Powers Assemble v0.6.0, Verb v0.3.0 and your application.
+* [engine-handlebars](https://github.com/jonschlinkert/engine-handlebars): Handlebars engine, consolidate.js style but with enhancements. This works with Assemble, express.js, engine-cache or any application that follows consolidate.js conventions.
+* [engine-lodash](https://github.com/jonschlinkert/engine-lodash): Lo-Dash engine, consolidate.js style but with enhancements. Works with Assemble, express.js, engine-cache or any application that follows consolidate.js conventions.
 
 ## Author
 
@@ -76,11 +104,13 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 + [twitter/doowb](http://twitter.com/doowb) 
 
 ## License
-Copyright (c) 2014 Brian Woodward, contributors.  
+Copyright (c) 2015 Brian Woodward  
 Released under the MIT license
 
 ***
 
-_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on November 10, 2014._
+_This file was generated by [verb-cli](https://github.com/assemble/verb-cli) on March 05, 2015._
 
-[issues]: https://github.com/doowb/question-helper/issues
+[engine-handlebars]: https://github.com/jonschlinkert/engine-handlebars
+[engine-lodash]: https://github.com/jonschlinkert/engine-lodash
+[template]: https://github.com/jonschlinkert/template
